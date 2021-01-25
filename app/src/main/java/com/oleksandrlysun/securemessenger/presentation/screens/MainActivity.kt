@@ -1,7 +1,8 @@
-package com.oleksandrlysun.securemessenger
+package com.oleksandrlysun.securemessenger.presentation.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.oleksandrlysun.securemessenger.R
 
 class MainActivity : AppCompatActivity() {
 
