@@ -13,13 +13,24 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -34,6 +45,14 @@ dependencies {
     def koin_version = "2.1.1"
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-scope:$koin_version"
+
+    // Network
+    def scarlet_version = "0.1.11"
+    implementation "com.tinder.scarlet:scarlet:$scarlet_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
+    implementation "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
+    implementation "com.tinder.scarlet:lifecycle-android:$scarlet_version"
 
     // Design
     implementation 'com.google.android.material:material:1.2.1'

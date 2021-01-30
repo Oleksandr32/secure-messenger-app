@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.oleksandrlysun.securemessenger">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SecureMessengerApplication"
         android:allowBackup="true"
