@@ -6,4 +6,8 @@ data class User(
     val lastName: String,
     val userName: String,
     val chats: ArrayList<Chat>
-)
+) {
+
+    val fullName: String
+        get() = "$firstName $lastName"
+}

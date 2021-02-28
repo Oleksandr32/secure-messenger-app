@@ -1,9 +1,8 @@
 package com.oleksandrlysun.securemessenger.di
 
-import com.oleksandrlysun.securemessenger.api.ApiService
-import com.oleksandrlysun.securemessenger.api.ScarletService
-import com.oleksandrlysun.securemessenger.api.impl.ApiServiceImpl
-import com.oleksandrlysun.securemessenger.api.utils.FlowStreamAdapter
+import com.oleksandrlysun.securemessenger.api.*
+import com.oleksandrlysun.securemessenger.api.impl.*
+import com.oleksandrlysun.securemessenger.api.utils.*
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
 import com.tinder.scarlet.messageadapter.gson.GsonMessageAdapter
@@ -13,8 +12,6 @@ import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import org.koin.dsl.module
-
-private const val API_URL = ""
 
 val apiModule = module {
 
@@ -29,7 +26,7 @@ val apiModule = module {
 
     single {
         Scarlet.Builder()
-            .webSocketFactory(get<OkHttpClient>().newWebSocketFactory(API_URL))
+            .webSocketFactory(get<OkHttpClient>().newWebSocketFactory(getProperty("api_url")))
             .addMessageAdapterFactory(GsonMessageAdapter.Factory())
             .addStreamAdapterFactory(FlowStreamAdapter.Factory)
             .lifecycle(AndroidLifecycle.ofApplicationForeground(get()))

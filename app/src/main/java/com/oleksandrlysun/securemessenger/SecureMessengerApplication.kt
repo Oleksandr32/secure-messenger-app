@@ -1,7 +1,7 @@
 package com.oleksandrlysun.securemessenger
 
 import android.app.Application
-import com.oleksandrlysun.securemessenger.di.appModule
+import com.oleksandrlysun.securemessenger.di.appModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,7 +11,8 @@ class SecureMessengerApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@SecureMessengerApplication)
-            modules(appModule)
+            properties(configs)
+            modules(appModules)
         }
     }
 }
