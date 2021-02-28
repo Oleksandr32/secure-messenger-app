@@ -8,6 +8,16 @@
     <fragment
         android:id="@+id/chatsFragment"
         android:name="com.oleksandrlysun.securemessenger.presentation.screens.chats.ChatsFragment"
-        android:label="WelcomeFragment"
-        tools:layout="@layout/fragment_chats" />
+        android:label="ChatsFragment"
+        tools:layout="@layout/fragment_chats">
+        <action
+            android:id="@+id/action_chatsFragment_to_createChatFragment"
+            app:destination="@id/createChatFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createChatFragment"
+        android:name="com.oleksandrlysun.securemessenger.presentation.screens.createchat.CreateChatFragment"
+        android:label="CreateChatFragment"
+        tools:layout="@layout/fragment_create_chat" />
 </navigation>
