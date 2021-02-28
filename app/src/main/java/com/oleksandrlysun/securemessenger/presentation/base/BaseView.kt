@@ -1,0 +1,3 @@
+package com.oleksandrlysun.securemessenger.presentation.base
+
+interface BaseView
