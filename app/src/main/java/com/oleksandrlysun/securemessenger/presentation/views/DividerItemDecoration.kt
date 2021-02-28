@@ -1,4 +1,4 @@
-package com.oleksandrlysun.securemessenger.presentation.utils
+package com.oleksandrlysun.securemessenger.presentation.views
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class DividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
     companion object {
-        private const val MARGIN_START_DP = 70
+        private const val MARGIN_START_DP = 88
     }
 
     private val attrs = intArrayOf(android.R.attr.listDivider)
