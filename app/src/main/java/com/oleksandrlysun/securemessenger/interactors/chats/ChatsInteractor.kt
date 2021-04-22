@@ -1,13 +1,12 @@
 package com.oleksandrlysun.securemessenger.interactors.chats
 
 import com.oleksandrlysun.securemessenger.api.ApiService
+import com.oleksandrlysun.securemessenger.extensions.ioThread
 import com.oleksandrlysun.securemessenger.interactors.base.BaseInteractor
 import com.oleksandrlysun.securemessenger.interactors.chats.ChatsAction.*
 import com.oleksandrlysun.securemessenger.models.*
 import com.oleksandrlysun.securemessenger.preferences.UserPreferences
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
+import io.reactivex.Flowable
 
 class ChatsInteractor(
     apiService: ApiService,
@@ -20,13 +19,18 @@ class ChatsInteractor(
         subscribe(action.serialize(), data)
     }
 
-    fun observeChats(): Flow<List<Chat>> {
-        return apiService.observeChats().flowOn(Dispatchers.IO)
+    fun observeChats(): Flowable<List<Chat>> {
+        return apiService.observeChats().ioThread()
+    }
+
+    fun observeChat(): Flowable<Chat> {
+        return apiService.observeChat().ioThread()
     }
 
     private fun ChatsAction.serialize(): String {
         return when (this) {
             GET -> "get"
+            CREATE -> "create"
         }
     }
 }
