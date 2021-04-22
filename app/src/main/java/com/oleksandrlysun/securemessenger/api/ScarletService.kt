@@ -4,19 +4,31 @@ import com.oleksandrlysun.securemessenger.models.*
 import com.tinder.scarlet.WebSocket
 import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.Flowable
 
 interface ScarletService {
 
     @Receive
-    fun observeEvents(): Flow<WebSocket.Event>
+    fun observeEvents(): Flowable<WebSocket.Event>
 
     @Send
     fun subscribe(subscribe: Subscribe)
 
     @Receive
-    fun observeChats(): Flow<List<Chat>>
+    fun observeUser(): Flowable<User>
 
     @Receive
-    fun observeUsers(): Flow<List<User>>
+    fun observeChats(): Flowable<List<Chat>>
+
+    @Receive
+    fun observeChat(): Flowable<Chat>
+
+    @Receive
+    fun observeMessages(): Flowable<List<Message>>
+
+    @Receive
+    fun observeMessage(): Flowable<Message>
+
+    @Receive
+    fun observeUsers(): Flowable<List<User>>
 }
