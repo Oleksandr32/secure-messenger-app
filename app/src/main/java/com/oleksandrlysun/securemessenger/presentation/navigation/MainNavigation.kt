@@ -1,7 +1,7 @@
 package com.oleksandrlysun.securemessenger.presentation.navigation
 
 import androidx.navigation.NavController.OnDestinationChangedListener
-import com.oleksandrlysun.securemessenger.models.User
+import com.oleksandrlysun.securemessenger.models.Chat
 
 interface MainNavigation {
 
@@ -11,7 +11,21 @@ interface MainNavigation {
 
     fun navigateUp(): Boolean
 
+    fun splashToLogin()
+
+    fun splashToPinCode()
+
+    fun loginToRegister()
+
+    fun loginToPinCode()
+
+    fun registerToPinCode()
+
+    fun pinCodeToChats()
+
+    fun chatsToChat(chat: Chat)
+
     fun chatsToCreateChat()
 
-    fun createChatToChat(user: User)
+    fun createChatToChat(chat: Chat)
 }

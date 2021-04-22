@@ -3,13 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_navigation_graph"
-    app:startDestination="@id/chatsFragment">
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.oleksandrlysun.securemessenger.presentation.screens.splash.SplashFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_splash">
+
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_splashFragment_to_pinCodeFragment"
+            app:destination="@id/pinCodeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.oleksandrlysun.securemessenger.presentation.screens.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_pinCodeFragment"
+            app:destination="@id/pinCodeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.oleksandrlysun.securemessenger.presentation.screens.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_registerFragment_to_pinCodeFragment"
+            app:destination="@id/pinCodeFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pinCodeFragment"
+        android:name="com.oleksandrlysun.securemessenger.presentation.screens.pincode.PinCodeFragment"
+        android:label="PinCodeFragment"
+        tools:layout="@layout/fragment_pin_code">
+
+        <action
+            android:id="@+id/action_pinCodeFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment"
+            app:popUpTo="@id/pinCodeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/chatsFragment"
         android:name="com.oleksandrlysun.securemessenger.presentation.screens.chats.ChatsFragment"
         android:label="ChatsFragment"
         tools:layout="@layout/fragment_chats">
+
+        <action
+            android:id="@+id/action_chatsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+
         <action
             android:id="@+id/action_chatsFragment_to_createChatFragment"
             app:destination="@id/createChatFragment" />
@@ -19,5 +86,17 @@
         android:id="@+id/createChatFragment"
         android:name="com.oleksandrlysun.securemessenger.presentation.screens.createchat.CreateChatFragment"
         android:label="CreateChatFragment"
-        tools:layout="@layout/fragment_create_chat" />
+        tools:layout="@layout/fragment_create_chat">
+
+        <action
+            android:id="@+id/action_createChatFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/chatsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.oleksandrlysun.securemessenger.presentation.screens.chat.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat" />
 </navigation>
