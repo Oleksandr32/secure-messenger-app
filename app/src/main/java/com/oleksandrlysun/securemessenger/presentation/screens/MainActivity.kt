@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import com.oleksandrlysun.securemessenger.R
-import com.oleksandrlysun.securemessenger.presentation.extensions.hideSoftInput
+import com.oleksandrlysun.securemessenger.extensions.hideSoftInput
 import com.oleksandrlysun.securemessenger.presentation.navigation.MainNavigation
 import org.koin.android.scope.ScopeActivity
 

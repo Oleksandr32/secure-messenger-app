@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import com.oleksandrlysun.securemessenger.R
-import com.oleksandrlysun.securemessenger.presentation.extensions.mainActivity
+import com.oleksandrlysun.securemessenger.extensions.mainActivity
 import org.koin.android.scope.ScopeFragment
 
 abstract class PresenterFragment : ScopeFragment(), BaseView {
@@ -26,7 +26,17 @@ abstract class PresenterFragment : ScopeFragment(), BaseView {
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI(view)
-        presenter.onViewCreated()
+        presenter.onViewCreated(Arguments(arguments))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onViewResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onViewPause()
     }
 
     override fun onDestroyView() {
