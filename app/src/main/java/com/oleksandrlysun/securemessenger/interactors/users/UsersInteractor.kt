@@ -1,13 +1,12 @@
 package com.oleksandrlysun.securemessenger.interactors.users
 
 import com.oleksandrlysun.securemessenger.api.ApiService
+import com.oleksandrlysun.securemessenger.extensions.ioThread
 import com.oleksandrlysun.securemessenger.interactors.base.BaseInteractor
 import com.oleksandrlysun.securemessenger.models.*
 import com.oleksandrlysun.securemessenger.preferences.UserPreferences
 import com.oleksandrlysun.securemessenger.interactors.users.UsersAction.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
+import io.reactivex.Flowable
 
 class UsersInteractor(
     apiService: ApiService,
@@ -20,8 +19,8 @@ class UsersInteractor(
         subscribe(action.serialize(), data)
     }
 
-    fun observeUsers(): Flow<List<User>> {
-        return apiService.observeUsers().flowOn(Dispatchers.IO)
+    fun observeUsers(): Flowable<List<User>> {
+        return apiService.observeUsers().ioThread()
     }
 
     private fun UsersAction.serialize(): String {
