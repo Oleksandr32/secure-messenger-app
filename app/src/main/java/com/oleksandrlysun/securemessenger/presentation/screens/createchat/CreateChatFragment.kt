@@ -4,8 +4,8 @@ import android.view.View
 import com.oleksandrlysun.securemessenger.R
 import com.oleksandrlysun.securemessenger.models.User
 import com.oleksandrlysun.securemessenger.presentation.base.PresenterFragment
-import com.oleksandrlysun.securemessenger.presentation.extensions.setOnTextChangeListener
-import com.oleksandrlysun.securemessenger.presentation.extensions.showSoftInput
+import com.oleksandrlysun.securemessenger.extensions.setOnTextChangeListener
+import com.oleksandrlysun.securemessenger.extensions.showSoftInput
 import com.oleksandrlysun.securemessenger.presentation.views.DividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_create_chat.*
 import org.koin.core.parameter.parametersOf
