@@ -1,12 +1,11 @@
 package com.oleksandrlysun.securemessenger.interactors.base
 
 import com.oleksandrlysun.securemessenger.api.ApiService
+import com.oleksandrlysun.securemessenger.extensions.ioThread
 import com.oleksandrlysun.securemessenger.models.Subscribe
 import com.oleksandrlysun.securemessenger.preferences.UserPreferences
 import com.tinder.scarlet.WebSocket
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
+import io.reactivex.Flowable
 
 abstract class BaseInteractor(
     protected val apiService: ApiService,
@@ -15,8 +14,8 @@ abstract class BaseInteractor(
 
     protected abstract val channel: String
 
-    fun observeEvents(): Flow<WebSocket.Event> {
-        return apiService.observeEvents().flowOn(Dispatchers.IO)
+    fun observeEvents(): Flowable<WebSocket.Event> {
+        return apiService.observeEvents().ioThread()
     }
 
     protected fun subscribe(action: String, data: Any? = null) {
