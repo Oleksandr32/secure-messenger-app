@@ -10,4 +10,6 @@ val preferencesModule = module {
     single<Preferences> { PreferencesImpl(androidContext()) }
 
     single { get<Preferences>().userPreferences }
+
+    single { get<Preferences>().chatPreferences }
 }
