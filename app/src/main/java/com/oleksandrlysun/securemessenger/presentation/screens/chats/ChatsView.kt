@@ -6,4 +6,6 @@ import com.oleksandrlysun.securemessenger.presentation.base.BaseView
 interface ChatsView : BaseView {
 
     fun setChats(chats: List<Chat>)
+
+    fun setChat(chat: Chat)
 }

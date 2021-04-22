@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oleksandrlysun.securemessenger.R
 import com.oleksandrlysun.securemessenger.models.Chat
 import com.oleksandrlysun.securemessenger.presentation.views.AvatarImageView
+import java.util.*
 
 class ChatsAdapter : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
-    var items: List<Chat> = ArrayList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private val items = LinkedList<Chat>()
+
+    var listener: ((Chat) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_chat, parent, false)
@@ -29,8 +28,19 @@ class ChatsAdapter : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
+    fun setItems(chats: List<Chat>) {
+        items.clear()
+        items.addAll(chats)
+        notifyDataSetChanged()
+    }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun addItem(item: Chat) {
+        items.addFirst(item)
+        notifyItemInserted(0)
+    }
+
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatarImageView = itemView.findViewById<AvatarImageView>(R.id.avatarImageView)
         private val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
         private val messageTextView = itemView.findViewById<TextView>(R.id.messageTextView)
@@ -41,6 +51,7 @@ class ChatsAdapter : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
             nameTextView.text = item.other.fullName
             messageTextView.text = "last message"//item.message
             dateTextView.text = "21.02.2021"//item.date
+            itemView.setOnClickListener { listener?.invoke(item) }
         }
     }
 }

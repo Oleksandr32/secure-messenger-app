@@ -17,16 +17,16 @@ class ChatsFragment : PresenterFragment(), ChatsView {
 
     override fun setupUI(view: View) {
         super.setupUI(view)
-        chatsRecyclerView.adapter = chatsAdapter
-        chatsRecyclerView.addItemDecoration(
-            DividerItemDecoration(
-                view.context
-            )
-        )
+        chatsRecyclerView.adapter = chatsAdapter.apply { listener = presenter::onChatClick }
+        chatsRecyclerView.addItemDecoration(DividerItemDecoration(view.context))
         createChatButton.setOnClickListener { presenter.createChat() }
     }
 
     override fun setChats(chats: List<Chat>) {
-        chatsAdapter.items = chats
+        chatsAdapter.setItems(chats)
+    }
+
+    override fun setChat(chat: Chat) {
+        chatsAdapter.addItem(chat)
     }
 }

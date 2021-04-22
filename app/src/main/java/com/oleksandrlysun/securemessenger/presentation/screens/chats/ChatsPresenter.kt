@@ -1,38 +1,62 @@
 package com.oleksandrlysun.securemessenger.presentation.screens.chats
 
-import com.oleksandrlysun.securemessenger.interactors.chats.ChatsAction
-import com.oleksandrlysun.securemessenger.interactors.chats.ChatsInteractor
-import com.oleksandrlysun.securemessenger.presentation.base.Presenter
+import com.oleksandrlysun.securemessenger.extensions.uiThread
+import com.oleksandrlysun.securemessenger.interactors.chats.*
+import com.oleksandrlysun.securemessenger.models.Chat
+import com.oleksandrlysun.securemessenger.presentation.base.*
 import com.oleksandrlysun.securemessenger.presentation.navigation.MainNavigation
-import com.tinder.scarlet.WebSocket.Event.*
-import kotlinx.coroutines.flow.collect
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import java.util.*
 
 class ChatsPresenter(
     view: ChatsView,
-    private val chatsInteractor: ChatsInteractor,
-    private val navigation: MainNavigation
+    private val navigation: MainNavigation,
+    private val chatsInteractor: ChatsInteractor
 ) : Presenter<ChatsView>(view) {
 
-    override fun onViewCreated() {
-        launchWithHandler {
-            chatsInteractor.observeEvents()
-                .collect { event ->
-                    if (event is OnConnectionOpened<*>) {
-                        chatsInteractor.subscribe(ChatsAction.GET)
-                        chatsInteractor.observeChats()
-                            .collect { chats ->
-                                view.setChats(chats)
-                            }
-                    }
-                }
-        }
+    private lateinit var compositeDisposable: CompositeDisposable
+
+    private var chats = LinkedList<Chat>()
+
+    override fun onViewCreated(arguments: Arguments) {
+        compositeDisposable = CompositeDisposable()
+        listenChats()
+        listenNewChat()
+        chatsInteractor.subscribe(ChatsAction.GET)
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        compositeDisposable.dispose()
+    }
+
+    fun onChatClick(chat: Chat) {
+        navigation.chatsToChat(chat)
     }
 
     fun createChat() {
         navigation.chatsToCreateChat()
+    }
+
+    private fun listenChats() {
+        chatsInteractor.observeChats()
+            .map { LinkedList(it) }
+            .uiThread()
+            .subscribe {
+                chats = it
+                view.setChats(it)
+            }
+            .addTo(compositeDisposable)
+
+    }
+
+    private fun listenNewChat() {
+        chatsInteractor.observeChat()
+            .uiThread()
+            .subscribe {
+                chats.add(it)
+                view.setChat(it)
+            }
+            .addTo(compositeDisposable)
     }
 }
