@@ -4,5 +4,7 @@ interface Preferences {
 
     val userPreferences: UserPreferences
 
+    val chatPreferences: ChatPreferences
+
     fun clear()
 }
