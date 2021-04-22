@@ -2,4 +2,26 @@
     <string name="app_name">Secure Messenger</string>
     <string name="create_chat">Create Chat</string>
     <string name="search">Search</string>
+    <string name="message">Message</string>
+    <string name="waiting_accept">Waiting for %1$s to accept the invitation…</string>
+    <string name="button_login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="fife">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="pin_code_create_hint">Please create a pin code</string>
+    <string name="pin_code_confirm_hint">Please confirm a pin code</string>
+    <string name="pin_code_enter_hint">Please enter a pin code</string>
+    <string name="hint_register">Don\'t have account? <font fgcolor='#FFD81B60'><u>Register</u></font></string>
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+    <string name="button_register">Register</string>
 </resources>
