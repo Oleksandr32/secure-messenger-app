@@ -1,4 +1,4 @@
-package com.oleksandrlysun.securemessenger.presentation.extensions
+package com.oleksandrlysun.securemessenger.extensions
 
 import android.content.Context
 import android.view.View
@@ -17,6 +17,9 @@ fun View.hideSoftInput() {
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
+val EditText.value
+    get() = text.toString()
+
 fun EditText.setOnTextChangeListener(onTextChanged: (String) -> Unit) {
-    doOnTextChanged { text, _, _, _ -> onTextChanged(text.toString()) }
+    doOnTextChanged { text, _, _, _ -> onTextChanged(value) }
 }

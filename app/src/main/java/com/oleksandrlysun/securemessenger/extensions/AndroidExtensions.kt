@@ -1,4 +1,4 @@
-package com.oleksandrlysun.securemessenger.presentation.extensions
+package com.oleksandrlysun.securemessenger.extensions
 
 import androidx.fragment.app.Fragment
 import com.oleksandrlysun.securemessenger.presentation.screens.MainActivity
